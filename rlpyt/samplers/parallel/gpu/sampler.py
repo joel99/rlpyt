@@ -24,7 +24,7 @@ class GpuSamplerBase(ParallelSamplerBase):
     buffer over shared memory, which is used for communication with workers.
     The step buffer includes `observations`, which the workers write and the
     master reads, and `actions`, which the master write and the workers read.
-    (The step buffer has leading dimension [`batch_B`], for the number of 
+    (The step buffer has leading dimension [`batch_B`], for the number of
     parallel environments, and each worker gets its own slice along that
     dimension.)  The step buffer object is held in both numpy array and torch
     tensor forms over the same memory; e.g. workers write to the numpy array

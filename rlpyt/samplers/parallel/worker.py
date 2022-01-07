@@ -96,6 +96,5 @@ def sampling_process(common_kwargs, worker_kwargs):
             for info in completed_infos:
                 c.traj_infos_queue.put(info)
         ctrl.barrier_out.wait()
-
     for env in envs + eval_envs:
         env.close()

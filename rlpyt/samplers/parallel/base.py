@@ -47,7 +47,7 @@ class ParallelSamplerBase(BaseSampler):
         and collector objects.  Waits for the worker process to complete all initialization
         (such as decorrelating environment states) before returning.  Barriers and other
         parallel indicators are constructed to manage worker processes.
-        
+
         .. warning::
             If doing offline agent evaluation, will use at least one evaluation environment
             instance per parallel worker, which might increase the total
@@ -147,6 +147,9 @@ class ParallelSamplerBase(BaseSampler):
     def shutdown(self):
         self.ctrl.quit.value = True
         self.ctrl.barrier_in.wait()
+        # Just in case this is the issue, drain all queues
+        drain_queue(self.traj_infos_queue)
+        drain_queue(self.eval_traj_infos_queue)
         for w in self.workers:
             w.join()
 

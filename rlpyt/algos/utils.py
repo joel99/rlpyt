@@ -160,3 +160,7 @@ def generalized_advantage_estimation_tl(reward, value, done, bootstrap_value,
             discount * value[t + 1][tt] - value[t][tt])
     return_[:] = advantage + value
     return advantage, return_
+
+def rescale_lambdas(lambda_arr, delta):
+    # rescale from our simple discretization to Quick et al's more accurate discretization of the diffeq
+    return np.log(1 + lambda_arr * delta) / delta

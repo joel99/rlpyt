@@ -237,7 +237,7 @@ class MinibatchRl(MinibatchRlBase):
 
     def __init__(self, log_traj_window=100, **kwargs):
         """
-        Args: 
+        Args:
             log_traj_window (int): How many trajectories to hold in deque for computing performance statistics.
         """
         super().__init__(**kwargs)
